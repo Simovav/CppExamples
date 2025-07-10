@@ -30,12 +30,15 @@ int main() {
 
 	std::cout << "P: (" << P.getX() << "," << P.getY() << ")\n";
 
-    //cpp23
+	//cpp23
 	//std::println("P: ({},{})", P.getX(), P.getY());
 
 	Point2D const Q(2, 3);
 	//Q.setX(3); // ERROR - Q is constant, cannot call a non const method
-	
+
 	std::cout << "Q: (" << Q.getX() << "," << Q.getY() << ")\n";
 	//std::println("Q: ({},{})", Q.getX(), Q.getY()); //Ok, those are const methods.
+
+	const int a = 3;
+	const_cast<int&>(a) = 4; //undefined behaviour, modifying a const variable
 }

@@ -4,8 +4,12 @@ private:
 public:
 	constexpr explicit IntWrapper(int val) noexcept :m_val(val) {}
 
-	constexpr const int& read() const noexcept { return m_val; }
-	constexpr int squared() const noexcept { return m_val * m_val; }
+	constexpr const int& read() const noexcept {
+		return m_val; 
+	}
+	constexpr int squared() const noexcept {
+		return m_val * m_val;
+	}
 
 	void write(int val) noexcept { m_val = val; }
 };

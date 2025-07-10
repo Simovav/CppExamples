@@ -3,6 +3,7 @@
 #include <ranges>
 #include <iomanip>
 #include <algorithm>
+#include <vector>
 
 int main()
 {
@@ -34,6 +35,26 @@ int main()
 
 	std::string_view szView_2(szOriginal_2); //This is just a view of the data in szOriginal
 
+	auto split_view = std::views::split(szView_2, ';');
+	for (auto&& item : split_view) {
+		std::string_view sv(item.begin(), item.end());
+		std::cout << sv << std::endl;
+
+	}
+
+	std::cout << "------------------" << std::endl;
+
+	auto split_view_2 = szView_2 | std::views::split(';');
+
+	for (auto&& item : split_view) {
+		std::string_view sv(item.begin(), item.end());
+		std::cout << sv << std::endl;
+
+	}
+
+	std::cout << "------------------" << std::endl;
+
+
 	std::ranges::for_each(szView_2 | std::views::split(';'), [](auto&& item) {
 		std::string_view sv(item.begin(), item.end());
 
@@ -50,4 +71,23 @@ int main()
 
 	std::string_view szBadView(std::string("this object dies"));
 	std::cout << "look at this bad view: " << szBadView << std::endl;
+
+
+	std::vector<int> vec{ 1, 2, 0, 3, 4, 5, 0, 6, 7, 3, 8, 0, 9, 10 };
+	auto filtered_vec = vec | std::views::filter([](int a) {return a != 0; });
+	for (auto&& item : filtered_vec) {
+		std::cout << item << " ";
+	}
+
+	std::cout << "------------------" << std::endl;
+
+
+	auto filtered_split_vec = vec | std::views::filter([](int a) {return a != 0; }) | std::views::split(3);
+	for (auto&& item : filtered_split_vec) {
+		std::cout << "(";
+		for (auto&& subitem : item) {
+			std::cout << subitem << " ";
+		}
+		std::cout << ")" << std::endl;
+	}
 }

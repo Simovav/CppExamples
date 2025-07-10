@@ -16,9 +16,9 @@ private:
 	BigObject m_big_obj;
 public:
 	//Different read methods:
-	const BigObject& data() const & noexcept { return m_big_obj; }
-	BigObject& data() & noexcept { return m_big_obj; }
-	BigObject&& data() && noexcept { return std::move(m_big_obj); }
+	const BigObject& data() const& noexcept { std::cout << "overload 1\n"; return m_big_obj; }
+	BigObject& data() & noexcept { std::cout << "overload 2\n";  return m_big_obj; }
+	BigObject&& data() && noexcept { std::cout << "overload 3\n";  return std::move(m_big_obj); }
 	//cpp23
 	//template<typename Self>
 	//auto&& data(this Self&& self) { return std::forward<Self>(self).m_big_obj; }
